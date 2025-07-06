@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "Legal Assistant AI",
+  "version": "1.0.0",
+  "description": "AI-powered legal document assistant that helps analyze and explain legal documents",
+  "permissions": ["activeTab", "storage", "scripting", "identity"],
+  "host_permissions": ["http://*/*", "https://*/*"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Legal Assistant AI",
+    "default_icon": {
+      "128": "icons/icon128.png"
+    }
+  },
+  
+  "oauth2": {
+    "client_id": "596548809218-o02oe5r242tdj4q7o7k3dbv7smd5lc1i.apps.googleusercontent.com",
+    "scopes": [
+      "profile",
+      "email"
+    ]
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["popup.html"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

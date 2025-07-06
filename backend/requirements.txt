@@ -1,0 +1,7 @@
+flask
+flask-cors
+pdfminer.six
+requests
+python-dotenv
+pillow
+pytesseract

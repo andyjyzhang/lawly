@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Assistant AI</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+
+    <div id="chatbot" class="chatbot-container">
+        <div id="chatInterface" class="chat-card">
+            <!-- Header -->
+            <div class="chat-header">
+                <div class="header-top">
+                    <div class="header-title">
+                        <button class="back-arr">
+                          <strong>Lawly.</strong>
+                        </button>
+                    </div>
+                    <button id="signin-btn">Sign in &rarr;</button>
+                    <div id="userinfo"></div>
+
+                </div>
+                <div id="documentInfo" class="document-info">
+                    <svg class="icon-sm" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                    </svg>
+                    <select id="fileDropdown">
+                      <option value="" selected>No document loaded</option>
+                    </select>
+                    <span id="documentBadge" class="badge hidden">Active</span>
+                
+                
+                  </div>
+            </div>
+
+            <!-- Document Upload Section -->
+            <div class="upload-section">  
+                <div class="upload-button" id="uploadButton">
+                    <input 
+                        type="file" 
+                        id="fileInput" 
+                        class="upload-input"
+                        accept=".pdf,image/png,image/jpeg"
+                        multiple="false"
+                    >
+
+                    <svg class="  icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                    </svg>
+                    <span id="uploadText">Upload Legal Document</span>
+                    <div class="upload-progress" id="uploadProgress"></div>
+                </div>
+                
+                <div id="documentStatus" class="document-status hidden">
+                    <svg class="status-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+                    </svg>
+                    <div>
+                        <div id="statusText">Document uploaded successfully</div>
+                        <div class="file-info">
+                            <span id="fileName"></span>
+                            <button id="removeFileBtn" class="remove-file-btn" title="Remove document">
+                              <svg class="status-icon" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"/>
+                                </svg>
+                                <span>Close Notification</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Content -->
+            <div class="chat-content">
+                <div id="messagesArea" class="messages-area">
+                    <!-- Welcome Screen -->
+                    <div id="welcomeScreen" class="welcome-screen">
+                        <img src="icons/icon128.png"/>
+                        <h3 class="welcome-title">Lawly, Everybody's Legal Assistant.</h3>
+                        <p class="welcome-description">
+                            Upload a PDF or photo of a legal document and chat with legal assistant Lawliet in <strong>any language</strong> to get started!
+                        </p>
+                        <div class="suggestions">
+                            <p id="suggestionsTitle" class="suggestions-title">Suggested questions:</p>
+                            <div id="suggestionButtons">
+                                <button class="suggestion-btn" data-question="What are the key terms in this document?">
+                                    What are the key terms in this document?
+                                </button>
+                                <button class="suggestion-btn" data-question="Explain the termination clause">
+                                    Explain the termination clause
+                                </button>
+                                <button class="suggestion-btn" data-question="Are there any potential red flags?">
+                                    Are there any potential red flags?
+                                </button>
+                                <button class="suggestion-btn" data-question="What are my rights under this agreement?">
+                                    What are my rights under this agreement?
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Messages will be inserted here -->
+                </div>
+
+                <!-- Input Area -->
+                <div class="input-area">
+                    <!-- Education Mode Banner -->
+                    <div id="educationBanner" class="education-banner hidden">
+                        <div class="education-header">
+                            <img id="education-button-img-2" src="icons/icon128.png"/>
+                            <span>Education Mode Active</span>
+                        </div>
+                        <p class="education-description">
+                            I'll think for longer to provide detailed, teaching-focused responses.
+                        </p>
+                    </div>
+
+                    <!-- Input Form -->
+                    <form id="chatForm" class="input-container">
+                        <div class="input-wrapper">
+                            <input 
+                                type="text" 
+                                id="messageInput" 
+                                class="message-input" 
+                                placeholder="Ask about this legal document..."
+                                autocomplete="off"
+                            >
+                            <button 
+                                type="button" 
+                                id="educationBtn" 
+                                class="education-btn inactive"
+                                title="Enable Education Mode"
+                            >
+                                <img id="education-button-img" src="icons/icon128.png"/>
+                            </button>
+                        </div>
+                        <button type="submit" id="sendBtn" class="send-btn">
+                            <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M2,21L23,12L2,3V10L17,12L2,14V21Z"/>
+                            </svg>
+                        </button>
+                    </form>
+
+                    <!-- Footer -->
+                    <div class="footer-info">
+                        <div class="footer-left">
+                            <span>Powered by Lawliet</span>
+                            <span id="teachingBadge" class="teaching-badge hidden">Education Mode</span>
+                        </div>
+                        <span id="pageDetectionBadge" class="document-badge hidden">Page Detected</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="popup.js"></script>
+</body>
+</html>
